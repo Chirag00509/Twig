@@ -1,0 +1,143 @@
+<html>
+<head>
+   <style>
+    small{
+    color : red;
+}
+* {box-sizing: border-box}
+.container {
+  padding: 16px;
+}
+h1{
+    text-align :center;
+    margin-left: 9rem;
+}
+form{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction : column
+}
+input[type=text], input[type=password], input[type=email] {
+  width: 170%;
+  padding: 15px;
+  margin: 5px 0 10px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+  width : 170%;
+}
+.registerbtn {
+  background-color: purple;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 170%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity:1;
+}
+a {
+  color: dodgerblue;
+}
+.signin {
+  margin-left:9rem;
+  text-align: center;
+}
+label{
+    margin-bottom:5rem;
+}
+   </style>
+</head>
+<body>
+
+<form action="/signup" method="post">
+  <div class="container">
+    <h1>Register</h1>
+    <hr>
+
+    <label for="username"><b>Username</b></label>
+    <br>
+    <input type="text" placeholder="Enter Username" name="username" id="username" required>
+    <br>
+    <small class=".small" id="usernameValidation"></small>
+    <br>
+
+    <label for="email"><b>Email</b></label>
+    <br>
+    <input type="email" placeholder="Enter Email" name="email" id="email" required>
+    <br>
+    <small id="emailValidation"></small>
+    <br>
+
+    <label for="password"><b>Password</b></label>
+    <br>
+    <input type="password" placeholder="Enter Password" name="password" id="password" required>
+    <br>
+    <small id="passwordValidation"></small>
+    <br>
+
+    <label for="confirmPassword"><b>Confirm Password</b></label>
+    <br>
+    <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
+    <br>
+    <small id="confirmPasswordValidation"></small>
+
+    <hr>
+
+    <button type="submit" class="registerbtn" onclick="return Validate()">Signup</button>
+  </div>
+  <div class="container signin">
+    <p>Already have an account? <a href="/login">Sign in</a>.</p>
+  </div>
+</form>
+
+<script>
+       function Validate() {
+       const Username = document.getElementById('username').value;
+       if(Username == "" || Username == null) {
+        document.getElementById("usernameValidation").innerHTML = "Please Enter Name";
+        document.getElementById("username").focus();
+        return false;
+       } else {
+        document.getElementById("usernameValidation").innerHTML = "";
+       }
+       
+       const Email = document.getElementById('email').value;
+       const emailRegresion =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+       if(!Email.match(emailRegresion) ) {
+        document.getElementById("emailValidation").innerHTML = "Please Enter correct Email";
+        return false;
+       } else {
+        document.getElementById("emailValidation").innerHTML = "";
+       }
+        const Password = document.getElementById("password").value;
+        const ConfirmPassword = document.getElementById("confirmPassword").value;
+        const passwordRegresion =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;;
+        if(!Password.match(passwordRegresion)){
+          document.getElementById("passwordValidation").innerHTML = "Please enter coreect Password";
+          return false;
+        }else{
+            document.getElementById("passwordValidation").innerHTML = "";
+        } 
+        if(ConfirmPassword == null || ConfirmPassword == "" || Password != ConfirmPassword) {
+            document.getElementById("confirmPasswordValidation").innerHTML = "Passwords do not match";
+            return false;
+        }else{
+            document.getElementById("confirmPasswordValidation").innerHTML = "";
+            alert("Succefully Sign Up");
+        }
+        return true;
+       }
+    </script>

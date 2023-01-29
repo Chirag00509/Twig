@@ -1,0 +1,107 @@
+<style>
+ small{
+    color : red;
+}
+* {box-sizing: border-box}
+.container {
+  padding: 16px;
+}
+h1{
+    text-align :center;
+    margin-left: 9rem;
+}
+form{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction : column
+}
+input[type=text], input[type=password], input[type=email] {
+  width: 170%;
+  padding: 15px;
+  margin: 5px 0 10px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+  width : 170%;
+}
+.registerbtn {
+  background-color: purple;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 170%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity:1;
+}
+a {
+  color: dodgerblue;
+}
+.signin {
+  margin-left:9rem;
+  text-align: center;
+}
+label{
+    margin-bottom:5rem;
+}
+</style>
+
+<form action="/login/password" method="post">
+  <div class="container">
+    <h1>Login</h1>
+    <hr>
+
+    <label for="username"><b>Username</b></label>
+    <br>
+    <input type="text" placeholder="Enter Username" name="username" id="username" required autofocus>
+    <br>
+    <small class=".small" id="usernameValidation"></small>
+    <br>
+
+    <label for="password"><b>Password</b></label>
+    <br>
+    <input type="password" placeholder="Enter Password" name="password" id="password" required>
+    <br>
+    <small id="passwordValidation"></small>
+    <br>
+    <hr>
+
+    <button type="submit" class="registerbtn" onclick="return Validate()">Sign in</button>
+  </div>
+  <div class="container signin">
+    <p>You have not an account? <a href="/signup">Sign up</a>.</p>
+  </div>
+</form>
+
+<script>
+function Validate() {
+       const Username = document.getElementById('username').value;
+       if(Username == "" || Username == null) {
+        document.getElementById("usernameValidation").innerHTML = "Please Enter Name";
+        document.getElementById("username").focus();
+        return false;
+       } else {
+        document.getElementById("usernameValidation").innerHTML = "";
+       }
+        const Password = document.getElementById("password").value;
+        if(Password == "" || Password == null){
+          document.getElementById("passwordValidation").innerHTML = "Please Enter Password";
+          return false;
+        }else{
+            document.getElementById("passwordValidation").innerHTML = "";
+        }
+        return true;
+}       
+</script>
